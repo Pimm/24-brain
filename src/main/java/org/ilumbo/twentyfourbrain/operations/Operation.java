@@ -8,7 +8,8 @@ public interface Operation {
 	 */
 	public boolean determineValid(int firstInput, int secondInput);
 	/**
-	 * Returns a string which describes this operation on the passed inputs in English (such as "3 + 5 = 8").
+	 * Returns a string which describes this operation on the passed inputs in a way humans can understand (such as
+	 * "3 + 5 = 8").
 	 */
 	public String describeForHumans(int firstInput, int secondInput);
 	/**
