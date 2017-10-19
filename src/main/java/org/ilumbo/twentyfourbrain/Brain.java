@@ -7,7 +7,6 @@ import org.ilumbo.twentyfourbrain.operations.Solidus;
 import org.ilumbo.twentyfourbrain.operations.Times;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class Brain {
 	/**
