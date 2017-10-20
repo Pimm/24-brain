@@ -115,6 +115,20 @@ public class Brain {
 		return 24 == output;
 	}
 	/**
+	 * Given the passed start values, counts and returns the number of different routes this brain can come up with that
+	 * are solutions. Note that as distinct routes can look very similar, the number returned by this method will probably
+	 * be higher than you'd expect.
+	 */
+	public int countSolutions(int[] startValues) {
+		int result = 0;
+		for (final Route candidate : routes) {
+			if (checkSolution(startValues, candidate)) {
+				result++;
+			}
+		}
+		return result;
+	}
+	/**
 	 * Finds the first route that is a solution given the passed start values and return a string with human-readable
 	 * proof, or {@code null} if there is no such route.
 	 */
