@@ -55,6 +55,22 @@ public class Brain {
 											new Step(State.TEMP_0, thirdPointer, secondOperation, State.TEMP_0),
 											new Step(State.TEMP_0, lastPointer, thirdOperation)
 									}));
+									// Add the variants of the route above which have the inputs on the second and third step swapped.
+									result.add(new Route(new Step[]{
+											new Step(firstPointer, secondPointer, firstOperation, State.TEMP_0),
+											new Step(thirdPointer, State.TEMP_0, secondOperation, State.TEMP_0),
+											new Step(State.TEMP_0, lastPointer, thirdOperation)
+									}));
+									result.add(new Route(new Step[]{
+											new Step(firstPointer, secondPointer, firstOperation, State.TEMP_0),
+											new Step(State.TEMP_0, thirdPointer, secondOperation, State.TEMP_0),
+											new Step(lastPointer, State.TEMP_0, thirdOperation)
+									}));
+									result.add(new Route(new Step[]{
+											new Step(firstPointer, secondPointer, firstOperation, State.TEMP_0),
+											new Step(thirdPointer, State.TEMP_0, secondOperation, State.TEMP_0),
+											new Step(lastPointer, State.TEMP_0, thirdOperation)
+									}));
 									// Compose the route that look like this:
 									//   0  ? 1  → t0
 									//   2  ? 3  → t1
@@ -64,6 +80,8 @@ public class Brain {
 											new Step(thirdPointer, lastPointer, secondOperation, State.TEMP_1),
 											new Step(State.TEMP_0, State.TEMP_1, thirdOperation)
 									}));
+									// (There is no need to try both t0 ? t1 → … and t1 ? t0 → …: there are also routes in which the start
+									// values are swapped, which is effectively the same.)
 								}
 							}
 						}
