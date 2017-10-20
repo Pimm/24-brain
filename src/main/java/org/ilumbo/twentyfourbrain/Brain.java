@@ -26,7 +26,7 @@ public class Brain {
 		routes = composeRoutes();
 	}
 	protected static Route[] composeRoutes() {
-		final ArrayList<Route> result = new ArrayList<>(64);
+		final ArrayList<Route> result = new ArrayList<>(8192);
 		final byte[] startPointers = new byte[]{State.START_0, State.START_1, State.START_2, State.START_3};
 		// Iterate over every order of start values.
 		for (final byte firstPointer : startPointers) {
