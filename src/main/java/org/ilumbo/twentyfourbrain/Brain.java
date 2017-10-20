@@ -28,10 +28,7 @@ public class Brain {
 	protected static Route[] composeRoutes() {
 		final ArrayList<Route> result = new ArrayList<>(64);
 		final byte[] startPointers = new byte[]{State.START_0, State.START_1, State.START_2, State.START_3};
-		// Compose the routes that look like this:
-		//   0 ? 1 → t
-		//   t ? 2 → t
-		//   t ? 3 → t
+		// Iterate over every order of start values.
 		for (final byte firstPointer : startPointers) {
 			for (final byte secondPointer : startPointers) {
 				if (secondPointer == firstPointer) {
@@ -45,13 +42,27 @@ public class Brain {
 						if (lastPointer == firstPointer || lastPointer == secondPointer || lastPointer == thirdPointer) {
 							continue;
 						}
+						// Iterate over every operation.
 						for (final Operation firstOperation : operations) {
 							for (final Operation secondOperation : operations) {
 								for (final Operation thirdOperation : operations) {
+									// Compose the route that look like this:
+									//   0  ? 1  → t0
+									//   t0 ? 2  → t0
+									//   t0 ? 3  → …
 									result.add(new Route(new Step[]{
 											new Step(firstPointer, secondPointer, firstOperation, State.TEMP_0),
 											new Step(State.TEMP_0, thirdPointer, secondOperation, State.TEMP_0),
 											new Step(State.TEMP_0, lastPointer, thirdOperation)
+									}));
+									// Compose the route that look like this:
+									//   0  ? 1  → t0
+									//   2  ? 3  → t1
+									//   t0 ? t1 → …
+									result.add(new Route(new Step[]{
+											new Step(firstPointer, secondPointer, firstOperation, State.TEMP_0),
+											new Step(thirdPointer, lastPointer, secondOperation, State.TEMP_1),
+											new Step(State.TEMP_0, State.TEMP_1, thirdOperation)
 									}));
 								}
 							}
